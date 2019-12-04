@@ -1,0 +1,11 @@
+{
+  "DataProcessingEngine": {
+    "DataProcessingConfigFilePath": "/opt/siemplify/siemplify_server/Configs/DataProcessingEngineConfig.config",
+    "CaseFilesOverflowTrigerCountOfFiles": 100000,
+    "CaseFilesOverflowTrigerTimePeriodInMin": 10,
+    "CaseFilesOverflowCriteriaCasesCount": 20,
+    "CaseFilesOverflowSaveFolder": "/i/Siemplify_Channels/Cases/ETL_Dispatcher_OverflowCases",
+    "ResetCaseInProcessTimeoutMinutes": 30,
+    "ServiceName": ""
+  }
+}

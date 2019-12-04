@@ -1,0 +1,14 @@
+{
+  "ServerService": {
+    "ServiceUri": "https://*:8443"
+  },
+  "EnrichmentTrim": {
+    "MaxPropCount": 100,
+    "MaxPropNameLenght": 240,
+    "MaxPropValueLenght": 256
+  },
+  "IntegrationsService": {
+    "DefaultIntegrationsFolder": "/opt/siemplify/siemplify_server/DefaultIntegrations",
+    "ScriptingFolderName": "Scripting/PythonSDK"
+  }
+}

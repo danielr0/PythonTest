@@ -1,0 +1,91 @@
+
+{
+  "General": {
+    "baseServerFolder": "/opt/siemplify/siemplify_server",
+    "configFolderPath": "/opt/siemplify/siemplify_server/Configs",
+    "allowedHosts": "*",
+    "commandLineExecutor": "/bin/bash",
+    "pgbinpath": "/var/lib/postgresql/10/bin"
+  },
+  "License": {
+    "filePath": "/opt/siemplify/siemplify_server/bin/Siemplify.lic",
+    "base64FilePath": "/opt/siemplify/siemplify_server/bin/Siemplify64.lic",
+    "customerIdPath": "/opt/siemplify/siemplify_server/bin/Siemplify.customer"
+  },
+  "Scripting": {
+    "pythonScriptProvider": "RemotePythonExecutorProxy",
+    "pythonVersions": [
+      {
+        "pythonVersion": "V2_7",
+        "pythonExecutableName": "/Library/Frameworks/Python.framework/Versions/2.7/bin/python2",
+        "pythonSitePackagesPath": "/Library/Python/2.7/site-packages",
+        "virtualEnvActivationFile": "bin/activate",
+        "virtualEnvPythonExecutableName": "bin/python"
+      },
+      {
+        "pythonVersion": "V3_7",
+        "pythonExecutableName": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
+        "pythonSitePackagesPath": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages",
+        "virtualEnvActivationFile": "bin/activate",
+        "virtualEnvPythonExecutableName": "bin/python"
+      }
+    ]
+  },
+
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Elasticsearch", "Siemplify.Common"],
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Error"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Elasticsearch",
+        "Args": {
+          "restrictedToMinimumLevel": "Information",
+          "nodeUris": "http://localhost:9200",
+          "indexFormat": "smp_server-{0:yyyy.MM.dd}",
+          "typeName": "SiemplifySeriLog",
+          "minimumLogEventLevel": "Debug",
+          "bufferLogShippingInterval": "2000",
+          "connectionGlobalHeaders": "authorization=Basic ZWxhc3RpYzplc0tvbmdvMDE="
+        }
+      },
+      {
+        "Name": "ColoredConsole",
+        "Args": {
+          "restrictedToMinimumLevel": "Debug",
+          "outputTemplate": "{Message:l}{NewLine}{Exception}"
+        }
+      }
+    ]
+  },
+  "Agent": {
+    "TestConnectivityTimeoutSeconds": "30"
+  },
+  "PythonExecutionService": {
+    "ServiceUri": "https://localhost:8000",
+    "TimeoutSeconds": 0,
+    "Token": null
+  },
+  "IndexerService": {
+    "Strategy": "ParallelIndexerStrategy",
+    "Service": "IndexServiceProxy"
+  },
+  "ConnectorsService": {
+    "ServiceUri": "https://localhost:8444",
+    "ConnectorsConfigFilePath": "/opt/siemplify/siemplify_server/Configs/ConnectorsEngine.config",
+    "ProcessingFolderPath": "/opt/siemplify/siemplify_server/ConnectorsProcessingFolder"
+  },
+  "ConnectorsFrameworkLogger": {
+    "OutputFolderPath": "/opt/siemplify/siemplify_server/Logs/Connectors",
+    "MaxItemsInLogFile": 1000,
+    "MaxFileIntervalInHours": 24,
+    "FilenameDateFormat": "yyyy_MM_dd_THH_mm_ss UTC",
+    "FileRetentionDays": 3
+  }
+}
+
+
